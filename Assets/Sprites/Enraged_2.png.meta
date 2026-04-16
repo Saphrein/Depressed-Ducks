@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: cea2b6c3aecfae4469e0021228d9435a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4461978017718199503
+    second: Enraged_2_0
+  - first:
+      213: -6114246934256908639
+    second: Enraged_2_1
+  - first:
+      213: -8435312362560236195
+    second: Enraged_2_2
+  - first:
+      213: 1599187911296061785
+    second: Enraged_2_3
+  - first:
+      213: -164862496231886075
+    second: Enraged_2_4
+  - first:
+      213: -7079733920516665970
+    second: Enraged_2_5
+  - first:
+      213: -8064148365409543658
+    second: Enraged_2_6
+  - first:
+      213: 7943172642967587908
+    second: Enraged_2_7
+  - first:
+      213: -6647309797539036618
+    second: Enraged_2_8
+  - first:
+      213: -5219298106177908986
+    second: Enraged_2_9
+  - first:
+      213: -7326837689884014248
+    second: Enraged_2_10
+  - first:
+      213: -1589625037784359
+    second: Enraged_2_11
+  - first:
+      213: 4832295312487165276
+    second: Enraged_2_12
+  - first:
+      213: -3498032639655400262
+    second: Enraged_2_13
+  - first:
+      213: 5423408290034502672
+    second: Enraged_2_14
+  - first:
+      213: -5175653259164793227
+    second: Enraged_2_15
+  - first:
+      213: 7839347832267553935
+    second: Enraged_2_16
+  - first:
+      213: 6872935342766013777
+    second: Enraged_2_17
+  - first:
+      213: 4292226894495682222
+    second: Enraged_2_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Enraged_2_0
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 50
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc4e1b5dd512ced30800000000000000
+      internalID: 4461978017718199503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_1
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 16
+        width: 40
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a68896dec4d52ba0800000000000000
+      internalID: -6114246934256908639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 56
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d55d2243910cfea80800000000000000
+      internalID: -8435312362560236195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_3
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95196e5bee4713610800000000000000
+      internalID: 1599187911296061785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_4
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 53
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5037053ee6a46bdf0800000000000000
+      internalID: -164862496231886075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 16
+        width: 49
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8d0253628bbfbd90800000000000000
+      internalID: -7079733920516665970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_6
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 53
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61a97bf89c3661090800000000000000
+      internalID: -8064148365409543658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_7
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 58
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44c0fad1f61db3e60800000000000000
+      internalID: 7943172642967587908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_8
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 52
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63246b545f200c3a0800000000000000
+      internalID: -6647309797539036618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_9
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f856486045197b0800000000000000
+      internalID: -5219298106177908986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_10
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 57
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8590587b0f7d15a90800000000000000
+      internalID: -7326837689884014248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_11
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 16
+        width: 17
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dafb449e3a5afff0800000000000000
+      internalID: -1589625037784359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_12
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 16
+        width: 27
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5d259eebf2cf0340800000000000000
+      internalID: 4832295312487165276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_13
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 45
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abc2e9cf8dd747fc0800000000000000
+      internalID: -3498032639655400262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_14
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 45
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01c4a67fa11d34b40800000000000000
+      internalID: 5423408290034502672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_15
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 16
+        width: 44
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 576c3e658c26c28b0800000000000000
+      internalID: -5175653259164793227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_16
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 16
+        width: 21
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8c390d9155facc60800000000000000
+      internalID: 7839347832267553935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_17
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 36
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15dbbc5a742916f50800000000000000
+      internalID: 6872935342766013777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enraged_2_18
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 34
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eae0bcd8e9d019b30800000000000000
+      internalID: 4292226894495682222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Enraged_2_0: 4461978017718199503
+      Enraged_2_1: -6114246934256908639
+      Enraged_2_10: -7326837689884014248
+      Enraged_2_11: -1589625037784359
+      Enraged_2_12: 4832295312487165276
+      Enraged_2_13: -3498032639655400262
+      Enraged_2_14: 5423408290034502672
+      Enraged_2_15: -5175653259164793227
+      Enraged_2_16: 7839347832267553935
+      Enraged_2_17: 6872935342766013777
+      Enraged_2_18: 4292226894495682222
+      Enraged_2_2: -8435312362560236195
+      Enraged_2_3: 1599187911296061785
+      Enraged_2_4: -164862496231886075
+      Enraged_2_5: -7079733920516665970
+      Enraged_2_6: -8064148365409543658
+      Enraged_2_7: 7943172642967587908
+      Enraged_2_8: -6647309797539036618
+      Enraged_2_9: -5219298106177908986
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
