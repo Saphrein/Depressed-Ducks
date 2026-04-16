@@ -24,17 +24,34 @@ public class GroundEnemy : MonoBehaviour
     private void FixedUpdate()
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, visionDistance, playerLayer);
-        DamageSystem ds = hit != null ? hit.GetComponent<DamageSystem>() : null;
 
-        // If player is in a special state, just ignore them and patrol
-        if (ds != null && !ds.IsGhosted && !ds.IsInBerserkState)
+        if (hit != null)
         {
-            ExecuteChase(hit.transform.position);
+            Vector2 directionToPlayer = (hit.transform.position - transform.position).normalized;
+
+            // --- NEW: Check if the player is in front of the mushroom ---
+            // moveDirection is 1 (right) or -1 (left). 
+            // We check if the player is within a 60-degree cone in front.
+            float angle = Vector2.Angle(new Vector2(moveDirection, 0), directionToPlayer);
+
+            if (angle < 60f) // Adjust this number to make the vision wider or narrower
+            {
+                float distanceToPlayer = Vector2.Distance(transform.position, hit.transform.position);
+                RaycastHit2D sightBlocker = Physics2D.Raycast(transform.position, directionToPlayer, distanceToPlayer, playerLayer | groundLayer);
+
+                if (sightBlocker.collider != null && ((1 << sightBlocker.collider.gameObject.layer) & playerLayer) != 0)
+                {
+                    DamageSystem ds = hit.GetComponent<DamageSystem>();
+                    if (ds != null && !ds.IsGhosted && !ds.IsInBerserkState)
+                    {
+                        ExecuteChase(hit.transform.position);
+                        return;
+                    }
+                }
+            }
         }
-        else
-        {
-            ExecutePatrol();
-        }
+
+        ExecutePatrol();
     }
 
     private void ExecuteChase(Vector3 target)
