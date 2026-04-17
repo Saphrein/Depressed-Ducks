@@ -3,6 +3,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -27,17 +29,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashDuration = 0.18f;
     [SerializeField] private float dashCooldown = 0.8f;
 
-    [Header("Drop Down")]
-    [SerializeField] private float dropDownTime = 0.6f;
-
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckDistance = 0.08f;
 
+    [Header("Audio Clips")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource loopSource;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip dashSound;
+    [SerializeField] private AudioClip wallSlideSound;
+    [SerializeField] private AudioClip runSound;
+    [SerializeField] private float runVolume = 0.3f;
+
     private Rigidbody2D rb;
     private CapsuleCollider2D col;
+    private Animator anim;
+    private DamageSystem ds;
 
     [HideInInspector] public Vector2 MoveInput;
+
+    // --- PAUSE VARIABLE ---
+    [HideInInspector] public bool canMove = true;
+
     private bool jumpHeld;
     private bool dashPressed;
     private float coyoteCounter;
@@ -53,39 +67,111 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<CapsuleCollider2D>();
+        anim = GetComponent<Animator>();
+        ds = GetComponent<DamageSystem>();
+        if (sfxSource == null) sfxSource = GetComponent<AudioSource>();
         rb.freezeRotation = true;
     }
 
     private void Update()
     {
+        // --- PAUSE CHECK ---
+        if (!canMove)
+        {
+            MoveInput = Vector2.zero;
+            if (loopSource.isPlaying) loopSource.Stop();
+            return;
+        }
+
         CheckGrounded();
         CheckWallTouch();
         HandleCoyoteTime();
         HandleJumpBuffer();
         HandleDashCooldown();
+        UpdateAnimations();
     }
-
-    // At the top of PlayerController
-    public bool canMove = true;
 
     private void FixedUpdate()
     {
+        // --- PAUSE CHECK ---
+        if (!canMove) return;
+
         HandleWallSlide();
-        // Only allow normal movement if NOT berserk/stunned
-        if (!isDashing && !isWallSliding && canMove)
+
+        bool isGhosted = ds != null && ds.IsGhosted;
+        bool isBerserk = ds != null && ds.IsInBerserkState;
+
+        if (isBerserk)
+        {
+            jumpBufferCounter = 0;
+            dashPressed = false;
+        }
+
+        if (!isDashing && !isWallSliding && canMove && !isBerserk)
         {
             HandleMovement();
             HandleGravity();
         }
-        HandleJump();
+
+        if (!isGhosted && !isBerserk)
+        {
+            HandleJump();
+        }
+
         HandleDash();
     }
 
-    // --- Public Triggers (Called by ControlRandomizer) ---
-    public void TriggerJump() { jumpBufferCounter = jumpBufferTime; jumpHeld = true; }
+    private void UpdateAnimations()
+    {
+        if (anim == null) return;
+
+        anim.SetFloat("Speed", Mathf.Abs(MoveInput.x));
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetBool("isWallSliding", isWallSliding);
+
+        float yVel = rb.linearVelocity.y;
+        if (Mathf.Abs(yVel) < 0.1f) yVel = 0;
+        anim.SetFloat("yVelocity", yVel);
+
+        // Flipping Logic - Now snappy
+        if (Mathf.Abs(MoveInput.x) > 0.1f)
+            transform.localScale = new Vector3(Mathf.Sign(MoveInput.x), 1, 1);
+        else if (Mathf.Abs(rb.linearVelocity.x) > 0.1f)
+            transform.localScale = new Vector3(Mathf.Sign(rb.linearVelocity.x), 1, 1);
+
+        // --- FOOTSTEP AUDIO LOGIC ---
+        bool isMoving = Mathf.Abs(MoveInput.x) > 0.1f;
+        if (isMoving && isGrounded && !isDashing && !isWallSliding && !ds.IsInBerserkState)
+        {
+            if (loopSource.clip != runSound || !loopSource.isPlaying)
+            {
+                loopSource.clip = runSound;
+                loopSource.loop = true;
+                loopSource.volume = runVolume;
+                loopSource.Play();
+            }
+            loopSource.pitch = Mathf.Lerp(0.8f, 1.2f, Mathf.Abs(rb.linearVelocity.x) / moveSpeed);
+        }
+        else if (loopSource.clip == runSound)
+        {
+            loopSource.Stop();
+            loopSource.clip = null;
+            loopSource.loop = false;
+            loopSource.pitch = 1f;
+        }
+    }
+
+    private void PlayOneShotSFX(AudioClip clip, float vol = 0.7f)
+    {
+        if (clip == null || sfxSource == null) return;
+        sfxSource.PlayOneShot(clip, vol);
+    }
+
+    // --- INPUT TRIGGERS (Updated for Pause) ---
+    public void TriggerJump() { if (canMove) { jumpBufferCounter = jumpBufferTime; jumpHeld = true; } }
     public void TriggerStopJump() { jumpHeld = false; }
-    public void TriggerDash() { dashPressed = true; }
-    public void TriggerDropDown() { StartCoroutine(DropDownRoutine()); }
+    public void TriggerDash() { if (canMove) dashPressed = true; }
+    public void TriggerDropDown() { if (canMove) StartCoroutine(DropDownRoutine()); }
 
     private void HandleMovement()
     {
@@ -99,17 +185,23 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpBufferCounter > 0f)
         {
-            if (coyoteCounter > 0f)
+            if (coyoteCounter > 0f || isWallSliding)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                FinishJump();
-            }
-            else if (isWallSliding)
-            {
-                float checkDist = col.size.x * 0.6f;
-                bool wallOnRight = Physics2D.Raycast(transform.position, Vector2.right, checkDist, wallLayer);
-                float jumpDir = wallOnRight ? -1f : 1f;
-                rb.linearVelocity = new Vector2(wallJumpForce.x * jumpDir, wallJumpForce.y);
+                // Kill footsteps immediately so jump is heard
+                if (loopSource.clip == runSound) loopSource.Stop();
+
+                if (isWallSliding)
+                {
+                    float checkDist = col.size.x * 0.6f;
+                    bool wallOnRight = Physics2D.Raycast(transform.position, Vector2.right, checkDist, wallLayer);
+                    float jumpDir = wallOnRight ? -1f : 1f;
+                    rb.linearVelocity = new Vector2(wallJumpForce.x * jumpDir, wallJumpForce.y);
+                }
+                else
+                {
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                }
+                PlayOneShotSFX(jumpSound, 1f);
                 FinishJump();
             }
         }
@@ -127,12 +219,30 @@ public class PlayerController : MonoBehaviour
 
     private void HandleWallSlide()
     {
-        if (isTouchingWall && !isGrounded && rb.linearVelocity.y < 0)
+        if (isTouchingWall && !isGrounded && rb.linearVelocity.y < -0.1f)
         {
             isWallSliding = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -wallSlideSpeed);
+            rb.linearVelocity = new Vector2(0, -wallSlideSpeed);
+
+            if (loopSource.clip != wallSlideSound || !loopSource.isPlaying)
+            {
+                loopSource.clip = wallSlideSound;
+                loopSource.loop = true;
+                loopSource.volume = 0.4f;
+                loopSource.Play();
+            }
         }
-        else isWallSliding = false;
+        else if (isWallSliding && loopSource.clip == wallSlideSound)
+        {
+            isWallSliding = false;
+            loopSource.Stop();
+            loopSource.clip = null;
+            loopSource.loop = false;
+        }
+        else
+        {
+            isWallSliding = false;
+        }
     }
 
     private void CheckWallTouch()
@@ -145,10 +255,14 @@ public class PlayerController : MonoBehaviour
 
     private void CheckGrounded()
     {
-        Vector2 origin = (Vector2)transform.position + Vector2.down * (col.size.y * 0.5f);
-        RaycastHit2D hit = Physics2D.BoxCast(origin, new Vector2(col.size.x * 0.9f, 0.05f), 0f, Vector2.down, groundCheckDistance, groundLayer);
+        Vector2 origin = (Vector2)transform.position + Vector2.down * (col.size.y * 0.45f);
+        RaycastHit2D hit = Physics2D.BoxCast(origin, new Vector2(col.size.x * 0.8f, 0.05f), 0f, Vector2.down, groundCheckDistance, groundLayer);
         isGrounded = hit.collider != null;
-        if (isGrounded) canDashInAir = true;
+        if (isGrounded)
+        {
+            canDashInAir = true;
+            coyoteCounter = coyoteTime;
+        }
     }
 
     private IEnumerator DropDownRoutine()
@@ -159,55 +273,42 @@ public class PlayerController : MonoBehaviour
         {
             Collider2D pCol = hit.collider;
             Physics2D.IgnoreCollision(col, pCol, true);
-            yield return new WaitForSeconds(dropDownTime);
+            yield return new WaitForSeconds(0.6f);
             Physics2D.IgnoreCollision(col, pCol, false);
         }
     }
 
     private void HandleDash()
     {
-        if (dashPressed && dashCooldownCounter <= 0f && canDashInAir)
-        {
-            StartCoroutine(DashRoutine());
-        }
+        if (dashPressed && dashCooldownCounter <= 0f && canDashInAir) StartCoroutine(DashRoutine());
         dashPressed = false;
     }
 
-    public void ApplyKnockback(Vector2 damageSourcePosition, float force)
+    public void ApplyKnockback(Vector2 source, float force)
     {
-        float direction = transform.position.x < damageSourcePosition.x ? -1f : 1f;
-
-        // Force the velocity to zero first so old momentum doesn't fight the knockback
         rb.linearVelocity = Vector2.zero;
-
-        // Use a slightly higher force if you feel the "stuck" behavior persists
-        rb.AddForce(new Vector2(direction * force, force), ForceMode2D.Impulse);
-
-        // Start a tiny "Lockout" so player input doesn't immediately cancel the knockback
+        float dir = transform.position.x < source.x ? -1f : 1f;
+        rb.AddForce(new Vector2(dir * force, force), ForceMode2D.Impulse);
         StartCoroutine(KnockbackLockout());
     }
 
     private IEnumerator KnockbackLockout()
     {
-        // Briefly disable move input so the player "reels" from the hit
-        float originalSpeed = moveSpeed;
-        moveSpeed = 0;
+        float speed = moveSpeed; moveSpeed = 0;
         yield return new WaitForSeconds(0.2f);
-        moveSpeed = originalSpeed;
+        moveSpeed = speed;
     }
 
     private IEnumerator DashRoutine()
     {
-        isDashing = true;
-        canDashInAir = false;
-        dashCooldownCounter = dashCooldown;
+        isDashing = true; if (anim) anim.SetBool("isDashing", true);
+        PlayOneShotSFX(dashSound, 0.8f);
+        canDashInAir = false; dashCooldownCounter = dashCooldown;
         float dir = MoveInput.x != 0 ? Mathf.Sign(MoveInput.x) : (transform.localScale.x > 0 ? 1f : -1f);
-        rb.gravityScale = 0f;
-        rb.linearVelocity = new Vector2(dir * dashForce, 0f);
+        rb.gravityScale = 0f; rb.linearVelocity = new Vector2(dir * dashForce, 0f);
         yield return new WaitForSeconds(dashDuration);
-        rb.gravityScale = 1f;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.4f, 0f);
-        isDashing = false;
+        rb.gravityScale = 1f; rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.4f, 0f);
+        isDashing = false; if (anim) anim.SetBool("isDashing", false);
     }
 
     private void HandleCoyoteTime() { if (isGrounded) coyoteCounter = coyoteTime; else coyoteCounter -= Time.deltaTime; }

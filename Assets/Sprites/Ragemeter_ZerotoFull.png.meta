@@ -1,0 +1,483 @@
+fileFormatVersion: 2
+guid: 68d9c6467f969d64db970c20ef5c7dd8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1061604526689537009
+    second: Ragemeter_ZerotoFull_0
+  - first:
+      213: 7254962435788510175
+    second: Ragemeter_ZerotoFull_1
+  - first:
+      213: -9192806318191639872
+    second: Ragemeter_ZerotoFull_2
+  - first:
+      213: -4392993422840925948
+    second: Ragemeter_ZerotoFull_3
+  - first:
+      213: 6851945724988123702
+    second: Ragemeter_ZerotoFull_4
+  - first:
+      213: 1366529952166023623
+    second: Ragemeter_ZerotoFull_5
+  - first:
+      213: 3879533238338126610
+    second: Ragemeter_ZerotoFull_6
+  - first:
+      213: -7993773390673263748
+    second: Ragemeter_ZerotoFull_7
+  - first:
+      213: -8053700094663876410
+    second: Ragemeter_ZerotoFull_8
+  - first:
+      213: -6636899660147408740
+    second: Ragemeter_ZerotoFull_9
+  - first:
+      213: 9036112969522803267
+    second: Ragemeter_ZerotoFull_10
+  - first:
+      213: 5100628845710064452
+    second: Ragemeter_ZerotoFull_11
+  - first:
+      213: -4776830243509275603
+    second: Ragemeter_ZerotoFull_12
+  - first:
+      213: -1370258307418234670
+    second: Ragemeter_ZerotoFull_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0439bebe4c6441f0800000000000000
+      internalID: -1061604526689537009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd31afb95edcea460800000000000000
+      internalID: 7254962435788510175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_2
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c28833fb579c6080800000000000000
+      internalID: -9192806318191639872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_3
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40170fac1c3f803c0800000000000000
+      internalID: -4392993422840925948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_4
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63a6c2e6550071f50800000000000000
+      internalID: 6851945724988123702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_5
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c199c550c3e6f210800000000000000
+      internalID: 1366529952166023623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_6
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2130775fceed6d530800000000000000
+      internalID: 3879533238338126610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_7
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7343f93479601190800000000000000
+      internalID: -7993773390673263748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_8
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 13
+        width: 36
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c0a70a2f628b3090800000000000000
+      internalID: -8053700094663876410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_9
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 13
+        width: 37
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c90c0034ceef4e3a0800000000000000
+      internalID: -6636899660147408740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_10
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 13
+        width: 40
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 342f4b2ded8b66d70800000000000000
+      internalID: 9036112969522803267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_11
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 13
+        width: 38
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44bb8af29e219c640800000000000000
+      internalID: 5100628845710064452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_12
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d247947c33a45bdb0800000000000000
+      internalID: -4776830243509275603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ragemeter_ZerotoFull_13
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 13
+        width: 34
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d0eecf445ddbfce0800000000000000
+      internalID: -1370258307418234670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 653447d0b7e3a474b9cc24dfeb668824
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Ragemeter_ZerotoFull_0: -1061604526689537009
+      Ragemeter_ZerotoFull_1: 7254962435788510175
+      Ragemeter_ZerotoFull_10: 9036112969522803267
+      Ragemeter_ZerotoFull_11: 5100628845710064452
+      Ragemeter_ZerotoFull_12: -4776830243509275603
+      Ragemeter_ZerotoFull_13: -1370258307418234670
+      Ragemeter_ZerotoFull_2: -9192806318191639872
+      Ragemeter_ZerotoFull_3: -4392993422840925948
+      Ragemeter_ZerotoFull_4: 6851945724988123702
+      Ragemeter_ZerotoFull_5: 1366529952166023623
+      Ragemeter_ZerotoFull_6: 3879533238338126610
+      Ragemeter_ZerotoFull_7: -7993773390673263748
+      Ragemeter_ZerotoFull_8: -8053700094663876410
+      Ragemeter_ZerotoFull_9: -6636899660147408740
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

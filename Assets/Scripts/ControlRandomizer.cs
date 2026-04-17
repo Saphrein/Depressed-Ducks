@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +8,7 @@ public class ControlRandomizer : MonoBehaviour
     private PlayerController player;
     public TextMeshProUGUI statusText;
 
-    private enum PlayerAction { Jump, Dash, DropDown }
+    private enum PlayerAction { Dash, DropDown, MoveLeft, MoveRight }
     private Dictionary<string, PlayerAction> currentMapping = new Dictionary<string, PlayerAction>();
 
     private void Awake()
@@ -20,63 +19,75 @@ public class ControlRandomizer : MonoBehaviour
 
     public void ResetControls()
     {
-        currentMapping["Jump"] = PlayerAction.Jump;
         currentMapping["Dash"] = PlayerAction.Dash;
         currentMapping["DropDown"] = PlayerAction.DropDown;
+        currentMapping["MoveLeft"] = PlayerAction.MoveLeft;
+        currentMapping["MoveRight"] = PlayerAction.MoveRight;
         if (statusText) statusText.text = "Controls: Normal";
     }
 
     public void ShuffleControls()
     {
-        currentMapping["Jump"] = PlayerAction.Jump;
-        currentMapping["Dash"] = PlayerAction.Dash;
-        currentMapping["DropDown"] = PlayerAction.DropDown;
+        // Reset first so swaps are always from a clean state
+        ResetControls();
 
-        string[] keys = { "Jump", "Dash", "DropDown" };
-        int firstIndex = Random.Range(0, 3);
-        int secondIndex = (firstIndex + Random.Range(1, 3)) % 3;
+        List<string> keys = new List<string>(currentMapping.Keys);
 
-        string keyA = keys[firstIndex];
-        string keyB = keys[secondIndex];
+        // Pick 2 different random keys and swap only them
+        int indexA = Random.Range(0, keys.Count);
+        int indexB;
+        do { indexB = Random.Range(0, keys.Count); } while (indexB == indexA);
+
+        string keyA = keys[indexA];
+        string keyB = keys[indexB];
 
         PlayerAction temp = currentMapping[keyA];
         currentMapping[keyA] = currentMapping[keyB];
         currentMapping[keyB] = temp;
 
-        if (statusText) statusText.text = $"<color=red>SWAPPED!</color>\n{keyA} ↔ {keyB}";
+        if (statusText) statusText.text = $"<color=red>SWAPPED!\n{keyA} \u2194 {keyB}</color>";
     }
 
-    public void OnMove(InputValue value) => player.MoveInput = value.Get<Vector2>();
-
-    public void OnJump(InputValue value)
+    public void OnMove(InputValue value)
     {
-        ExecuteAction(currentMapping["Jump"], value.isPressed);
+        Vector2 raw = value.Get<Vector2>();
+        Vector2 remapped = raw;
+
+        if (raw.x < 0) remapped.x = GetRemappedAxis(currentMapping["MoveLeft"]);
+        else if (raw.x > 0) remapped.x = GetRemappedAxis(currentMapping["MoveRight"]);
+
+        player.MoveInput = remapped;
     }
 
-    public void OnDash(InputValue value)
-    {
-        if (value.isPressed) ExecuteAction(currentMapping["Dash"], true);
-    }
-
-    public void OnDropDown(InputValue value)
-    {
-        if (value.isPressed) ExecuteAction(currentMapping["DropDown"], true);
-    }
-
-    private void ExecuteAction(PlayerAction action, bool isPressed)
+    private float GetRemappedAxis(PlayerAction action)
     {
         switch (action)
         {
-            case PlayerAction.Jump:
-                if (isPressed) player.TriggerJump();
-                else player.TriggerStopJump();
-                break;
-            case PlayerAction.Dash:
-                if (isPressed) player.TriggerDash();
-                break;
-            case PlayerAction.DropDown:
-                if (isPressed) player.TriggerDropDown();
-                break;
+            case PlayerAction.MoveLeft: return -1f;
+            case PlayerAction.MoveRight: return 1f;
+            case PlayerAction.Dash: player.TriggerDash(); return 0f;
+            case PlayerAction.DropDown: player.TriggerDropDown(); return 0f;
+            default: return 0f;
+        }
+    }
+
+    public void OnJump(InputValue value)
+    {
+        if (value.isPressed) player.TriggerJump();
+        else player.TriggerStopJump();
+    }
+
+    public void OnDash(InputValue value) { if (value.isPressed) ExecuteAction(currentMapping["Dash"]); }
+    public void OnDropDown(InputValue value) { if (value.isPressed) ExecuteAction(currentMapping["DropDown"]); }
+
+    private void ExecuteAction(PlayerAction action)
+    {
+        switch (action)
+        {
+            case PlayerAction.Dash: player.TriggerDash(); break;
+            case PlayerAction.DropDown: player.TriggerDropDown(); break;
+            case PlayerAction.MoveLeft: player.MoveInput = Vector2.left; break;
+            case PlayerAction.MoveRight: player.MoveInput = Vector2.right; break;
         }
     }
 }
