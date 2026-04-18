@@ -2,46 +2,68 @@ using UnityEngine;
 
 public class WallCrawler : MonoBehaviour
 {
-    [Header("Movement")]
+    [Header("Movement Settings")]
     public float speed = 3f;
-    public float patrolDistance = 4f; // How far up/down it goes from start
+    [Tooltip("How many units UP the enemy will travel from its start point")]
+    public float distanceUp = 2f;
+    [Tooltip("How many units DOWN the enemy will travel from its start point")]
+    public float distanceDown = 2f;
 
-    private float minY;
-    private float maxY;
+    private float topBoundary;
+    private float bottomBoundary;
     private int direction = 1;
     private float startX;
 
     void Start()
     {
-        // Lock the X position so it stays on the side of the wall
         startX = transform.position.x;
 
-        // Set the boundaries based on where you place it in the scene
-        minY = transform.position.y - patrolDistance;
-        maxY = transform.position.y + patrolDistance;
+        // Calculate boundaries based on the initial placement in the editor
+        topBoundary = transform.position.y + distanceUp;
+        bottomBoundary = transform.position.y - distanceDown;
     }
 
     void Update()
     {
-        // Move only on the Y axis
-        transform.Translate(Vector2.up * direction * speed * Time.deltaTime);
+        // 1. Calculate movement
+        float nextY = transform.position.y + (direction * speed * Time.deltaTime);
 
-        // Check if it hit the top or bottom limits
-        if (transform.position.y >= maxY)
+        // 2. Check Boundaries
+        if (direction == 1 && nextY >= topBoundary)
         {
             direction = -1;
-            transform.position = new Vector3(startX, maxY, transform.position.z);
+            nextY = topBoundary;
+            FlipVisual();
         }
-        else if (transform.position.y <= minY)
+        else if (direction == -1 && nextY <= bottomBoundary)
         {
             direction = 1;
-            transform.position = new Vector3(startX, minY, transform.position.z);
+            nextY = bottomBoundary;
+            FlipVisual();
         }
+
+        // 3. Apply position
+        transform.position = new Vector3(startX, nextY, transform.position.z);
     }
 
-    // Keep X perfectly locked even if physics bumps it
-    void LateUpdate()
+    private void FlipVisual()
     {
-        transform.position = new Vector3(startX, transform.position.y, transform.position.z);
+        transform.localScale = new Vector3(transform.localScale.x, direction, transform.localScale.z);
+    }
+
+    // This lets you see the patrol range for EVERY enemy in the Scene View
+    private void OnDrawGizmosSelected()
+    {
+        // Only draws when you click on the enemy in the editor
+        float gizmoTop = Application.isPlaying ? topBoundary : transform.position.y + distanceUp;
+        float gizmoBottom = Application.isPlaying ? bottomBoundary : transform.position.y - distanceDown;
+
+        Gizmos.color = Color.green;
+        Vector3 startLine = new Vector3(transform.position.x, gizmoTop, transform.position.z);
+        Vector3 endLine = new Vector3(transform.position.x, gizmoBottom, transform.position.z);
+
+        Gizmos.DrawLine(startLine, endLine);
+        Gizmos.DrawCube(startLine, new Vector3(0.5f, 0.05f, 0.1f));
+        Gizmos.DrawCube(endLine, new Vector3(0.5f, 0.05f, 0.1f));
     }
 }
