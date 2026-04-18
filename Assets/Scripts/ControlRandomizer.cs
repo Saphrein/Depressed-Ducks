@@ -28,12 +28,10 @@ public class ControlRandomizer : MonoBehaviour
 
     public void ShuffleControls()
     {
-        // Reset first so swaps are always from a clean state
         ResetControls();
 
         List<string> keys = new List<string>(currentMapping.Keys);
 
-        // Pick 2 different random keys and swap only them
         int indexA = Random.Range(0, keys.Count);
         int indexB;
         do { indexB = Random.Range(0, keys.Count); } while (indexB == indexA);
@@ -45,7 +43,40 @@ public class ControlRandomizer : MonoBehaviour
         currentMapping[keyA] = currentMapping[keyB];
         currentMapping[keyB] = temp;
 
-        if (statusText) statusText.text = $"<color=red>SWAPPED!\n{keyA} \u2194 {keyB}</color>";
+        // Helper function to get the key name even for nested Move composites
+        string bindingA = GetKeyName(keyA);
+        string bindingB = GetKeyName(keyB);
+
+        if (statusText)
+        {
+            statusText.text = $"<color=red>SWAPPED!\n{keyA} ({bindingA}) \u2194 {keyB} ({bindingB})</color>";
+        }
+    }
+
+    private string GetKeyName(string actionName)
+    {
+        var inputActions = player.GetComponent<PlayerInput>().actions;
+        var moveAction = inputActions["Move"];
+
+        if (actionName == "MoveLeft" || actionName == "MoveRight")
+        {
+            // We look for "a" for Left and "d" for Right based on your screenshot
+            string targetKey = actionName == "MoveLeft" ? "/a" : "/d";
+
+            for (int i = 0; i < moveAction.bindings.Count; i++)
+            {
+                // This checks if the physical key path contains "a" or "d"
+                if (moveAction.bindings[i].path.Contains(targetKey, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    return moveAction.GetBindingDisplayString(i);
+                }
+            }
+            return "Key Not Set";
+        }
+        else
+        {
+            return inputActions[actionName].GetBindingDisplayString();
+        }
     }
 
     public void OnMove(InputValue value)

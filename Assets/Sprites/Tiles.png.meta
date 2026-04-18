@@ -276,7 +276,7 @@ TextureImporter:
         width: 77
         height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -285,6 +285,28 @@ TextureImporter:
       bones: []
       spriteID: 1e4a0a23d16506f4b8c3ee79fac7d947
       internalID: -4684333735789482159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tiles_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09aee97f088d104593ece4d8961dc38
+      internalID: -5062486230716756072
       vertices: []
       indices: 
       edges: []

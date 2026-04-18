@@ -40,7 +40,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip dashSound;
     [SerializeField] private AudioClip wallSlideSound;
     [SerializeField] private AudioClip runSound;
+    [SerializeField] private AudioClip enrageSound; // New Enrage Sound
     [SerializeField] private float runVolume = 0.3f;
+    [SerializeField] private float enrageVolume = 0.5f;
 
     private Rigidbody2D rb;
     private CapsuleCollider2D col;
@@ -48,8 +50,6 @@ public class PlayerController : MonoBehaviour
     private DamageSystem ds;
 
     [HideInInspector] public Vector2 MoveInput;
-
-    // --- PAUSE VARIABLE ---
     [HideInInspector] public bool canMove = true;
 
     private bool jumpHeld;
@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // --- PAUSE CHECK ---
         if (!canMove)
         {
             MoveInput = Vector2.zero;
@@ -93,7 +92,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // --- PAUSE CHECK ---
         if (!canMove) return;
 
         HandleWallSlide();
@@ -125,6 +123,8 @@ public class PlayerController : MonoBehaviour
     {
         if (anim == null) return;
 
+        bool isBerserk = ds != null && ds.IsInBerserkState;
+
         anim.SetFloat("Speed", Mathf.Abs(MoveInput.x));
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isWallSliding", isWallSliding);
@@ -133,15 +133,33 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(yVel) < 0.1f) yVel = 0;
         anim.SetFloat("yVelocity", yVel);
 
-        // Flipping Logic - Now snappy
         if (Mathf.Abs(MoveInput.x) > 0.1f)
             transform.localScale = new Vector3(Mathf.Sign(MoveInput.x), 1, 1);
         else if (Mathf.Abs(rb.linearVelocity.x) > 0.1f)
             transform.localScale = new Vector3(Mathf.Sign(rb.linearVelocity.x), 1, 1);
 
-        // --- FOOTSTEP AUDIO LOGIC ---
-        bool isMoving = Mathf.Abs(MoveInput.x) > 0.1f;
-        if (isMoving && isGrounded && !isDashing && !isWallSliding && !ds.IsInBerserkState)
+        // --- AUDIO LOOP LOGIC (ENRAGE PRIORITY) ---
+        if (isBerserk)
+        {
+            if (loopSource.clip != enrageSound || !loopSource.isPlaying)
+            {
+                loopSource.clip = enrageSound;
+                loopSource.loop = true;
+                loopSource.volume = enrageVolume;
+                loopSource.Play();
+            }
+        }
+        else if (isWallSliding)
+        {
+            if (loopSource.clip != wallSlideSound || !loopSource.isPlaying)
+            {
+                loopSource.clip = wallSlideSound;
+                loopSource.loop = true;
+                loopSource.volume = 0.4f;
+                loopSource.Play();
+            }
+        }
+        else if (Mathf.Abs(MoveInput.x) > 0.1f && isGrounded && !isDashing)
         {
             if (loopSource.clip != runSound || !loopSource.isPlaying)
             {
@@ -152,12 +170,15 @@ public class PlayerController : MonoBehaviour
             }
             loopSource.pitch = Mathf.Lerp(0.8f, 1.2f, Mathf.Abs(rb.linearVelocity.x) / moveSpeed);
         }
-        else if (loopSource.clip == runSound)
+        else
         {
-            loopSource.Stop();
-            loopSource.clip = null;
-            loopSource.loop = false;
-            loopSource.pitch = 1f;
+            // Stop looping sounds if none of the above conditions are met
+            if (loopSource.isPlaying)
+            {
+                loopSource.Stop();
+                loopSource.clip = null;
+                loopSource.pitch = 1f;
+            }
         }
     }
 
@@ -167,7 +188,6 @@ public class PlayerController : MonoBehaviour
         sfxSource.PlayOneShot(clip, vol);
     }
 
-    // --- INPUT TRIGGERS (Updated for Pause) ---
     public void TriggerJump() { if (canMove) { jumpBufferCounter = jumpBufferTime; jumpHeld = true; } }
     public void TriggerStopJump() { jumpHeld = false; }
     public void TriggerDash() { if (canMove) dashPressed = true; }
@@ -187,7 +207,6 @@ public class PlayerController : MonoBehaviour
         {
             if (coyoteCounter > 0f || isWallSliding)
             {
-                // Kill footsteps immediately so jump is heard
                 if (loopSource.clip == runSound) loopSource.Stop();
 
                 if (isWallSliding)
@@ -223,21 +242,6 @@ public class PlayerController : MonoBehaviour
         {
             isWallSliding = true;
             rb.linearVelocity = new Vector2(0, -wallSlideSpeed);
-
-            if (loopSource.clip != wallSlideSound || !loopSource.isPlaying)
-            {
-                loopSource.clip = wallSlideSound;
-                loopSource.loop = true;
-                loopSource.volume = 0.4f;
-                loopSource.Play();
-            }
-        }
-        else if (isWallSliding && loopSource.clip == wallSlideSound)
-        {
-            isWallSliding = false;
-            loopSource.Stop();
-            loopSource.clip = null;
-            loopSource.loop = false;
         }
         else
         {
